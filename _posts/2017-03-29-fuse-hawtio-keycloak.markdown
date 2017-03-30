@@ -53,7 +53,7 @@ The keycloak server can now be started and accessed at *https://localhost:8443*.
 # Install Red Hat JBoss Fuse 6.3
 I unzipped the latest Fuse distribution and then followed the instructions at [^2].  The items that need to be configured as detailed in the instructions are:
 
-* ${KARAF_HOME}/etc/system.properties
+* ${KARAF_HOME}/etc/system.properties[^8]
 * copy keycloak-hawtio.json and keycloak-hawtio-client.json to ${KARAF_HOME}/etc/
 * Edit the keycloak files for the keycloak installation location, if necessary
 
@@ -88,7 +88,21 @@ The keycloak-hawtio-client.json is what is sent to the end user/client and just 
 }
 ```
 
-The Fuse service can now be started (e.g. *${KARAF_HOME}/bin/fuse*).
+The ${KARAF_HOME}/etc/system.properties is updated with the necessary hawtio configurations
+
+```
+hawtio.keycloakEnabled=true
+hawtio.realm=keycloak
+hawtio.keycloakClientConfig=${karaf.base}/etc/keycloak-hawtio-client.json
+hawtio.rolePrincipalClasses=org.keycloak.adapters.jaas.RolePrincipal,org.apache.karaf.jaas.boot.principal.RolePrincipal
+```
+
+The Fuse service can now be started (e.g. *${KARAF_HOME}/bin/fuse*).  Finally, install the keycloak JAAS module and adapter.
+
+```
+JBossFuse:karaf@root> features:addurl mvn:org.keycloak/keycloak-osgi-features/3.0.0.CR1/xml/features
+JBossFuse:karaf@root> features:install keycloak-jaas
+```
 
 # Configure Keycloak flows and executions
 
@@ -149,3 +163,4 @@ Items not tested in this demo:
 [^5]:[Keycloak java adapter attributes](https://keycloak.gitbooks.io/documentation/securing_apps/topics/oidc/java/java-adapter-config.html)
 [^6]:[Keycloak docs](https://github.com/keycloak/keycloak-documentation/pull/56/commits/8e505a19beda38698a0ad7523cc1b030c9b115b3)
 [^7]:[Fuse and Keycloak demo](https://github.com/keycloak/keycloak/tree/master/examples/fuse)
+[^8]:[Keycloak docs - Hawtio](https://keycloak.gitbooks.io/documentation/securing_apps/topics/oidc/java/fuse/hawtio.html)
