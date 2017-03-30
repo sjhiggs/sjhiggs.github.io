@@ -4,6 +4,11 @@
 	display: block;
 }
 
+.bordered-image
+{
+	border:1px solid #021a40;
+}
+
 img + em 
 { 
 	display: block; 

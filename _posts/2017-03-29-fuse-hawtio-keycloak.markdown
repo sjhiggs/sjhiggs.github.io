@@ -96,19 +96,19 @@ Add a realm and import the *demorealm.json* from [^7].  This will set up some pr
 
 The last piece is to configure Keycloak to prompt the user for a certificate instead of username/password.  This is done by modifying the browser flow for the demo realm.  This process, and the configuration of the X.509 execution, is in the keycloak docs.  The next couple screenshots show my configuration for this test.
 
-![Browser X509 Flow](/assets/img/05-keycloak-flow.png){: .center-image }
+![Browser X509 Flow](/assets/img/05-keycloak-flow.png){: .center-image .bordered-image}
 *Copy the browser flow and edit for X.509 auth*
 
 
-![Configure Execution](/assets/img/06-keycloak-execution-config.png){: .center-image }
+![Configure Execution](/assets/img/06-keycloak-execution-config.png){: .center-image .bordered-image}
 *Configure the execution to map cert attributes to user.  I chose to map the certificate CN to Keycloak username.*
 
 
-![Change binding](/assets/img/08-keycloak-flow-bindings.png){: .center-image }
+![Change binding](/assets/img/08-keycloak-flow-bindings.png){: .center-image .bordered-image}
 *Change the browser binding to use the new X509 browser flow*
 
 
-![Configure User](/assets/img/07-user-role-config.png){: .center-image }
+![Configure User](/assets/img/07-user-role-config.png){: .center-image .bordered-image}
 *Configure a user with a username that matches the appropriate cert attribute.*
 
 
@@ -125,7 +125,7 @@ Let's see if it all works!  When authenticating to hawtio, the end user is redir
 ![Keycloak Confirm Cert](/assets/img/03-keycloak-confirm.png){: .center-image }
 *Keycloak form confirmation page is displayed*
 
-![Fuse Logged In](/assets/img/04-fuse-logged-in.png){: .center-image }
+![Fuse Logged In](/assets/img/04-fuse-logged-in.png){: .center-image .bordered-image}
 *We are logged in with the user defined by the CN in the cert*
 
 
