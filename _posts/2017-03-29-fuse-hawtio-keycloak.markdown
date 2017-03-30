@@ -6,7 +6,7 @@ categories: fuse sso x509 smartcard
 ---
 
 # Introduction - preview of X.509 Authentication in RH-SSO
-This page will outline the steps I took to enable client certificate authentication to Red Hat JBoss Fuse 6.3 via Keycloak.  This is particularly useful for smartcard/token authentication; in my case I was testing with a Yubikey hosting a PIV applet.
+This page will outline the steps I took to enable client certificate authentication to Red Hat JBoss Fuse 6.3 via Keycloak.  This is particularly useful for smartcard/token authentication; in my case I was testing with a Yubikey hosting a PIV applet.  This feature will be in future releases of RH-SS0 (currently slated for 7.2), so here is a preview of things to come.
 
 # Environment
 This exercise was all run locally on my laptop, and all references were set up for localhost.  
