@@ -97,4 +97,4 @@ container-add-profile root mykeycloak
 [^2]:[X.509/PKCS11 and SSH](https://developers.yubico.com/PIV/Guides/SSH_with_PIV_and_PKCS11.html)
 [^3]:[OpenSSL CA Instructions](https://jamielinux.com/docs/openssl-certificate-authority/)
 [^4]:[ENTESB-6777](https://issues.jboss.org/browse/ENTESB-6777)
-
+[^5]:[Keycloak Fuse Examples](https://github.com/keycloak/keycloak/tree/master/examples/fuse/fuse-admin)
