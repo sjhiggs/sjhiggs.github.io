@@ -96,6 +96,7 @@ hawtio.realm=keycloak
 hawtio.keycloakClientConfig=${karaf.base}/etc/keycloak-hawtio-client.json
 hawtio.rolePrincipalClasses=org.keycloak.adapters.jaas.RolePrincipal,org.apache.karaf.jaas.boot.principal.RolePrincipal
 ```
+*N.B. - the keycloakClientConfig requires file:// in later versions of keycloak*
 
 The Fuse service can now be started (e.g. *${KARAF_HOME}/bin/fuse*).  Finally, install the keycloak JAAS module and adapter.
 
