@@ -154,6 +154,9 @@ Items not tested in this demo:
 * LDAP integration
 * Hawtio with Kerberos
 
+# More Keycloak integration with Fuse
+A follow-up to this post can be found [here](https://sjhiggs.github.io/fuse/sso/karaf/x509/smartcard/2017/10/09/keycloak-karaf-cli.html)
+
 
 # References
 
