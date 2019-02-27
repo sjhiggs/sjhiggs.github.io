@@ -55,6 +55,7 @@ The first step os to set up a base system on top of which the Openshift nodes wi
        virsh pool-start openshift_images
 ```
 9.  Clone scripts from github[^2].
+10. Download RHEL server DVD image, kickstart scripts in the associated repo assume location /home/qemu/rhel-server-7.4-x86_64-dvd.iso, but this can be adjusted in ${SCRIPTS}/kickstart/ks-openshift.cfg.
 
 
 # Edit Ansible hosts file
