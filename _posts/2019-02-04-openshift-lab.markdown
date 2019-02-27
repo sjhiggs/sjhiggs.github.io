@@ -48,12 +48,14 @@ The first step os to set up a base system on top of which the Openshift nodes wi
        virsh pool-define-as --name openshift_images --type dir --target /home/openshift_images
        virsh pool-autostart openshift_images
        virsh pool-start openshift_images
+9.  Clone scripts from github[^2].
+
 
 # Edit Ansible hosts file
-Edit the hosts-ose-install for appropriate hosts/IP addresses, etc.
+Edit the ${SCRIPTS}/ansible/hosts-ose-install for appropriate hosts/IP addresses, etc.
 
 # Set up secret data for ansible scripts
-Secret data for the ansible scripts are stored in the ansible/group_vars/all/vault.yml file.
+Secret data for the ansible scripts are stored in the ${SCRIPTS}/ansible/group_vars/all/vault.yml file.
 
 ```
 ansible-vault create group_vars/all/vault.yml
@@ -69,7 +71,7 @@ secret_subscription_pool:
 ```
 
 # Create dns server
-The DNS server could be externalized to another server or network device.  I did find that installing the DNS server on a separate VM reduced problems during install of the openshift environment.  It's not strictly necessary to host the DNS on it's own VM; it could be co-located with the master server, for instance. From the kickstart directory in the custom scripts repo[^2], run the following.
+The DNS server could be externalized to another server or network device.  I did find that installing the DNS server on a separate VM reduced problems during install of the openshift environment.  It's not strictly necessary to host the DNS on it's own VM; it could be co-located with the master server, for instance. From ${SCRIPTS}/kickstart directory, run the following:
 
 ```
 ./install-node.sh -u myuser -s dns -i 192.168.1.114 -m 255.255.255.0 -g 192.168.1.1 -n 192.168.1.1 -p openshift_images -x 2048 -y 16 -z 1
@@ -86,7 +88,7 @@ ssh-keygen -t rsa
 ```
 
 # Set up dns server
-The DNS server can now be configured via the ansible script in the custom scripts repo[^2].
+The DNS server can now be configured via the ansible script in the ${SCRIPTS}/ansible directory.
 
 ```
 export ANSIBLE_HOST_KEY_CHECKING=False
@@ -103,7 +105,7 @@ Use the same script that was used to create the dns server to create the remaini
 ```
 
 # Configure openshift servers using custom ansible scripts
-This custom script sets up some prerequisites before using the openshift-ansible scripts.  In particular, repos are set up, nested virtualization is enabled, useful packages are installed, hostnames are assigned, and root's public ssh key is distributed to the nodes. Run the following from the custom scripts ansible directory:
+This custom script sets up some prerequisites before using the openshift-ansible scripts.  In particular, repos are set up, nested virtualization is enabled, useful packages are installed, hostnames are assigned, and root's public ssh key is distributed to the nodes. Run the following from the ${SCRIPTS}/ansible directory:
 ```
 ansible-playbook -i hosts-ose-install --vault-id @prompt openshift-prerequisites.yml
 ```
@@ -112,13 +114,13 @@ ansible-playbook -i hosts-ose-install --vault-id @prompt openshift-prerequisites
 
 ```
 cd /usr/share/ansible/openshift-ansible/
-ansible-playbook -i /home/shiggs/openshift_install/ansible/hosts-ose-install playbooks/prerequisites.yml --vault-id @prompt
+ansible-playbook -i ${SCRIPTS}/ansible/hosts-ose-install playbooks/prerequisites.yml --vault-id @prompt
 ```
 
 *Important! Restart all openshift servers- without a restart of openshift servers, dbus/dnsmasq issues are encountered during installation of cluster.  Make sure the following resolves on each node: nslookup cdn.redhat.com*
 
 ```
-ansible-playbook -i /home/shiggs/openshift_install/ansible/hosts-ose-install playbooks/deploy_cluster.yml --vault-id @prompt
+ansible-playbook -i ${SCRIPTS}/ansible/hosts-ose-install playbooks/deploy_cluster.yml --vault-id @prompt
 ```
 
 Note: this step takes a long time!
@@ -129,4 +131,4 @@ Note: this step takes a long time!
 
 # References
 [^1]:[RHEL Registration]( https://access.redhat.com/labs/registrationassistant/)
-[^2]:[Custom Scripts](https://)
+[^2]:[Custom Scripts](https://github.com/sjhiggs/lab-openshift-install)
